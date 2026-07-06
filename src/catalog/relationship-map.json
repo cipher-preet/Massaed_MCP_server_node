@@ -1,0 +1,828 @@
+{
+  "relations": [
+    {
+      "fromCollection": "areas",
+      "toCollection": "branches",
+      "localField": "branch_id",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "branch_id references a document in branches."
+    },
+    {
+      "fromCollection": "breaks",
+      "toCollection": "designations",
+      "localField": "designationId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designationId references a document in designations."
+    },
+    {
+      "fromCollection": "client_memberships",
+      "toCollection": "clients",
+      "localField": "client",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "client references a document in clients."
+    },
+    {
+      "fromCollection": "client_memberships",
+      "toCollection": "client_products",
+      "localField": "clientProductId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientProductId references a document in client_products."
+    },
+    {
+      "fromCollection": "client_memberships",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "client_memberships",
+      "toCollection": "memberships",
+      "localField": "upgraded_from",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "upgraded_from references a document in memberships."
+    },
+    {
+      "fromCollection": "client_payments",
+      "toCollection": "client_memberships",
+      "localField": "clientMembershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientMembershipId references a document in client_memberships."
+    },
+    {
+      "fromCollection": "client_payments",
+      "toCollection": "clients",
+      "localField": "clientId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientId references a document in clients."
+    },
+    {
+      "fromCollection": "client_products",
+      "toCollection": "clients",
+      "localField": "client",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "client references a document in clients."
+    },
+    {
+      "fromCollection": "client_products",
+      "toCollection": "areas",
+      "localField": "area",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "area references a document in areas."
+    },
+    {
+      "fromCollection": "client_products",
+      "toCollection": "technicians",
+      "localField": "assignedSalesman",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "assignedSalesman references a document in technicians."
+    },
+    {
+      "fromCollection": "client_products",
+      "toCollection": "branches",
+      "localField": "branch",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "branch references a document in branches."
+    },
+    {
+      "fromCollection": "client_referrals",
+      "toCollection": "clients",
+      "localField": "referred_id",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "referred_id references a document in clients."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "client_memberships",
+      "localField": "clientMembership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientMembership references a document in client_memberships."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "clients",
+      "localField": "client",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "client references a document in clients."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "client_products",
+      "localField": "clientProduct",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientProduct references a document in client_products."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "client_services",
+      "localField": "previous_service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "previous_service references a document in client_services."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "technicians",
+      "localField": "assignedEngineer",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "assignedEngineer references a document in technicians."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "client_services",
+      "localField": "parent_service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "parent_service references a document in client_services."
+    },
+    {
+      "fromCollection": "client_services",
+      "toCollection": "technicians",
+      "localField": "raisedBy",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "raisedBy references a document in technicians."
+    },
+    {
+      "fromCollection": "clientmembershipebenefits",
+      "toCollection": "client_memberships",
+      "localField": "clientMembershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientMembershipId references a document in client_memberships."
+    },
+    {
+      "fromCollection": "clientmembershipebenefits",
+      "toCollection": "memberships",
+      "localField": "membershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membershipId references a document in memberships."
+    },
+    {
+      "fromCollection": "clientmembershipebenefits",
+      "toCollection": "clients",
+      "localField": "clientId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientId references a document in clients."
+    },
+    {
+      "fromCollection": "clientmembershipebenefits",
+      "toCollection": "client_products",
+      "localField": "clientProductId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientProductId references a document in client_products."
+    },
+    {
+      "fromCollection": "clientmembershipspareparts",
+      "toCollection": "client_memberships",
+      "localField": "clientMembershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientMembershipId references a document in client_memberships."
+    },
+    {
+      "fromCollection": "clientmembershipspareparts",
+      "toCollection": "memberships",
+      "localField": "membershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membershipId references a document in memberships."
+    },
+    {
+      "fromCollection": "clientmembershipspareparts",
+      "toCollection": "clients",
+      "localField": "clientId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientId references a document in clients."
+    },
+    {
+      "fromCollection": "clientmembershipspareparts",
+      "toCollection": "client_products",
+      "localField": "clientProductId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientProductId references a document in client_products."
+    },
+    {
+      "fromCollection": "clients",
+      "toCollection": "clients",
+      "localField": "parent_client",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "parent_client references a document in clients."
+    },
+    {
+      "fromCollection": "designations",
+      "toCollection": "departments",
+      "localField": "departmentId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "departmentId references a document in departments."
+    },
+    {
+      "fromCollection": "designations",
+      "toCollection": "designations",
+      "localField": "reporter",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "reporter references a document in designations."
+    },
+    {
+      "fromCollection": "documentfiles",
+      "toCollection": "messages",
+      "localField": "messageId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "messageId references a document in messages."
+    },
+    {
+      "fromCollection": "documentfiles",
+      "toCollection": "rooms",
+      "localField": "roomId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "roomId references a document in rooms."
+    },
+    {
+      "fromCollection": "jobinformations",
+      "toCollection": "designations",
+      "localField": "designationId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designationId references a document in designations."
+    },
+    {
+      "fromCollection": "jobinformations",
+      "toCollection": "designations",
+      "localField": "assistant",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "assistant references a document in designations."
+    },
+    {
+      "fromCollection": "leaves",
+      "toCollection": "designations",
+      "localField": "designationId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designationId references a document in designations."
+    },
+    {
+      "fromCollection": "levels",
+      "toCollection": "designations",
+      "localField": "designationId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designationId references a document in designations."
+    },
+    {
+      "fromCollection": "links",
+      "toCollection": "messages",
+      "localField": "messageId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "messageId references a document in messages."
+    },
+    {
+      "fromCollection": "links",
+      "toCollection": "rooms",
+      "localField": "roomId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "roomId references a document in rooms."
+    },
+    {
+      "fromCollection": "mbenefits",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "mdiscounts",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "membershipreminders",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "membershipserviceplans",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "membershipserviceplans",
+      "toCollection": "services",
+      "localField": "service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "service references a document in services."
+    },
+    {
+      "fromCollection": "membershipspareparts",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "membershipspareparts",
+      "toCollection": "sparepartcategories",
+      "localField": "categoryId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "categoryId references a document in sparepartcategories."
+    },
+    {
+      "fromCollection": "membershipspareparts",
+      "toCollection": "spareparts",
+      "localField": "sparePartIds",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "sparePartIds references a document in spareparts."
+    },
+    {
+      "fromCollection": "messages",
+      "toCollection": "rooms",
+      "localField": "roomId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "roomId references a document in rooms."
+    },
+    {
+      "fromCollection": "offers_plans",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "payment_plans",
+      "toCollection": "memberships",
+      "localField": "membership",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "membership references a document in memberships."
+    },
+    {
+      "fromCollection": "payment_terms",
+      "toCollection": "clients",
+      "localField": "clientId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientId references a document in clients."
+    },
+    {
+      "fromCollection": "payment_terms",
+      "toCollection": "client_memberships",
+      "localField": "clientMembershipId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientMembershipId references a document in client_memberships."
+    },
+    {
+      "fromCollection": "payment_terms",
+      "toCollection": "client_products",
+      "localField": "clientProductId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "clientProductId references a document in client_products."
+    },
+    {
+      "fromCollection": "products",
+      "toCollection": "productcategories",
+      "localField": "categoryId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "categoryId references a document in productcategories."
+    },
+    {
+      "fromCollection": "qualifications",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "resourceitems",
+      "toCollection": "resources",
+      "localField": "resourceId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "resourceId references a document in resources."
+    },
+    {
+      "fromCollection": "rids",
+      "toCollection": "client_services",
+      "localField": "serviceId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "serviceId references a document in client_services."
+    },
+    {
+      "fromCollection": "rooms",
+      "toCollection": "client_services",
+      "localField": "serviceId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "serviceId references a document in client_services."
+    },
+    {
+      "fromCollection": "schedule_calls",
+      "toCollection": "clients",
+      "localField": "client",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "client references a document in clients."
+    },
+    {
+      "fromCollection": "service_area_wi_tcrs",
+      "toCollection": "services",
+      "localField": "serviceId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "serviceId references a document in services."
+    },
+    {
+      "fromCollection": "service_area_wi_tcrs",
+      "toCollection": "client_services",
+      "localField": "client_service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "client_service references a document in client_services."
+    },
+    {
+      "fromCollection": "service_area_wi_tcrs",
+      "toCollection": "technicians",
+      "localField": "submittedBy",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "submittedBy references a document in technicians."
+    },
+    {
+      "fromCollection": "servicespareparts",
+      "toCollection": "services",
+      "localField": "serviceId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "serviceId references a document in services."
+    },
+    {
+      "fromCollection": "servicespareparts",
+      "toCollection": "sparepartcategories",
+      "localField": "categoryId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "categoryId references a document in sparepartcategories."
+    },
+    {
+      "fromCollection": "servicespareparts",
+      "toCollection": "spareparts",
+      "localField": "sparePartIds",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "sparePartIds references a document in spareparts."
+    },
+    {
+      "fromCollection": "spareparts",
+      "toCollection": "resources",
+      "localField": "categoryId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "categoryId references a document in resources."
+    },
+    {
+      "fromCollection": "taskclosingrequirements",
+      "toCollection": "designations",
+      "localField": "designations",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designations references a document in designations."
+    },
+    {
+      "fromCollection": "taskclosingrequirements",
+      "toCollection": "resourceitems",
+      "localField": "tools",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "tools references a document in resourceitems."
+    },
+    {
+      "fromCollection": "taskclosingrequirements",
+      "toCollection": "resourceitems",
+      "localField": "machinery",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "machinery references a document in resourceitems."
+    },
+    {
+      "fromCollection": "taskclosingrequirements",
+      "toCollection": "resourceitems",
+      "localField": "materials",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "materials references a document in resourceitems."
+    },
+    {
+      "fromCollection": "taskclosingrequirements",
+      "toCollection": "services",
+      "localField": "service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "service references a document in services."
+    },
+    {
+      "fromCollection": "technician_attendances",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_bagrequests",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_bags",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_banks",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_daily_schedules",
+      "toCollection": "technicians",
+      "localField": "technicianId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technicianId references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_designations",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_designations",
+      "toCollection": "departments",
+      "localField": "department",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "department references a document in departments."
+    },
+    {
+      "fromCollection": "technician_designations",
+      "toCollection": "designations",
+      "localField": "designation",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designation references a document in designations."
+    },
+    {
+      "fromCollection": "technician_designations",
+      "toCollection": "levels",
+      "localField": "level",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "level references a document in levels."
+    },
+    {
+      "fromCollection": "technician_designations",
+      "toCollection": "technicians",
+      "localField": "reporter",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "reporter references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_emirates_ids",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_idles",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_leaves",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_leaves",
+      "toCollection": "leaves",
+      "localField": "leave_type",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "leave_type references a document in leaves."
+    },
+    {
+      "fromCollection": "technician_licenses",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_location_logs",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_medicals",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_passports",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_paths",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_ratings",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technician_ratings",
+      "toCollection": "clients",
+      "localField": "ratedBy",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "ratedBy references a document in clients."
+    },
+    {
+      "fromCollection": "technician_ratings",
+      "toCollection": "client_services",
+      "localField": "service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "service references a document in client_services."
+    },
+    {
+      "fromCollection": "technician_residency_visas",
+      "toCollection": "technicians",
+      "localField": "technician",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technician references a document in technicians."
+    },
+    {
+      "fromCollection": "technicianbreaks",
+      "toCollection": "technicians",
+      "localField": "technicianId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "technicianId references a document in technicians."
+    },
+    {
+      "fromCollection": "technicianbreaks",
+      "toCollection": "breaks",
+      "localField": "breakId",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "breakId references a document in breaks."
+    },
+    {
+      "fromCollection": "technicians",
+      "toCollection": "areas",
+      "localField": "branch_area",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "branch_area references a document in areas."
+    },
+    {
+      "fromCollection": "technicians",
+      "toCollection": "branches",
+      "localField": "branch",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "branch references a document in branches."
+    },
+    {
+      "fromCollection": "workinstructions",
+      "toCollection": "designations",
+      "localField": "designations",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "designations references a document in designations."
+    },
+    {
+      "fromCollection": "workinstructions",
+      "toCollection": "resourceitems",
+      "localField": "tools",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "tools references a document in resourceitems."
+    },
+    {
+      "fromCollection": "workinstructions",
+      "toCollection": "resourceitems",
+      "localField": "machinery",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "machinery references a document in resourceitems."
+    },
+    {
+      "fromCollection": "workinstructions",
+      "toCollection": "resourceitems",
+      "localField": "materials",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "materials references a document in resourceitems."
+    },
+    {
+      "fromCollection": "workinstructions",
+      "toCollection": "services",
+      "localField": "service",
+      "foreignField": "_id",
+      "type": "many-to-one",
+      "description": "service references a document in services."
+    }
+  ]
+}
