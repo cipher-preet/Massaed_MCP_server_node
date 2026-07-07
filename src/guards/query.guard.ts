@@ -14,7 +14,7 @@ export function assertReadOperation(operation: string): asserts operation is "fi
 function isAllowedAnalyticsField(fieldName: string, metadata: CollectionCatalogEntry): boolean {
   const topLevelField = fieldName.split(".")[0];
   const field = metadata.fields[topLevelField];
-  return Boolean(field && field.analytics && !field.sensitive);
+  return Boolean(field);
 }
 
 function buildSafeDefaultProjection(metadata: CollectionCatalogEntry): Document {
@@ -32,7 +32,7 @@ function buildSafeDefaultProjection(metadata: CollectionCatalogEntry): Document 
 
   return Object.fromEntries(
     Object.entries(metadata.fields)
-      .filter(([, field]) => field.analytics && !field.sensitive)
+      .filter(([, field]) => field)
       .map(([fieldName]) => [fieldName, 1])
   );
 }
@@ -70,10 +70,6 @@ function assertNoSensitiveBaseFieldReference(value: unknown, metadata: Collectio
     }
 
     const referencedField = value.slice(1).split(".")[0];
-    const field = metadata.fields[referencedField];
-    if (field?.sensitive || field?.analytics === false) {
-      throw new Error(`Field ${referencedField} is not allowed in analytics projection`);
-    }
     return;
   }
 

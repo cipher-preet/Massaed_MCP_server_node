@@ -3,6 +3,7 @@ import { getDb } from "../db/mongo.client.js";
 import { getMaxTimeMS } from "../guards/limit.guard.js";
 import { guardAggregationQuery, guardFindQuery } from "../guards/query.guard.js";
 import { schemaService } from "./schema.service.js";
+import { normalizeAggregationPipeline, normalizeFindFilter } from "../utils/mongo-normalizer.js";
 
 export class AnalyticsService {
   async runSafeFind(args: {
@@ -14,10 +15,12 @@ export class AnalyticsService {
   }): Promise<Document[]> {
     const catalog = schemaService.getCatalog();
     const guarded = guardFindQuery({ ...args, catalog });
+    const metadata = catalog.collections[args.collectionName];
+    const filter = normalizeFindFilter(args.filter, metadata);
 
     return getDb()
       .collection(args.collectionName)
-      .find(args.filter, {
+      .find(filter, {
         projection: guarded.projection,
         limit: guarded.limit,
         maxTimeMS: getMaxTimeMS()
@@ -33,10 +36,12 @@ export class AnalyticsService {
   }): Promise<Document[]> {
     const catalog = schemaService.getCatalog();
     const guarded = guardAggregationQuery({ ...args, catalog });
+    const metadata = catalog.collections[args.collectionName];
+    const pipeline = normalizeAggregationPipeline(guarded.pipeline, metadata);
 
     return getDb()
       .collection(args.collectionName)
-      .aggregate(guarded.pipeline, {
+      .aggregate(pipeline, {
         allowDiskUse: false,
         maxTimeMS: guarded.maxTimeMS
       })
