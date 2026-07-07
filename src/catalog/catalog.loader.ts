@@ -34,10 +34,11 @@ function normalizeCollectionRelation(value: unknown): unknown {
   const relation = value as Record<string, unknown>;
   const localField = relation.localField ?? relation.field;
   const foreignField = relation.foreignField ?? "_id";
-  const targetCollection = relation.targetCollection;
+  const targetCollection = relation.targetCollection ?? relation.collection ?? relation.toCollection ?? relation.target;
 
   return {
     ...relation,
+    targetCollection,
     localField,
     foreignField,
     type: normalizeRelationType(relation.type),
