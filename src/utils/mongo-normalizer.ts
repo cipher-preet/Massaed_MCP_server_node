@@ -37,6 +37,10 @@ function normalizeExtendedMongoValue(value: unknown): unknown {
 }
 
 function normalizeObjectIdValue(value: unknown): unknown {
+  if (value instanceof ObjectId) {
+    return value;
+  }
+
   if (typeof value === "string" && objectIdPattern.test(value)) {
     return new ObjectId(value);
   }
@@ -56,6 +60,86 @@ function normalizeObjectIdValue(value: unknown): unknown {
 
   return Object.fromEntries(
     Object.entries(document).map(([key, childValue]) => {
+      if (key.startsWith("$")) {
+        return [key, normalizeObjectIdValue(childValue)];
+      }
+
+      return [key, childValue];
+    })
+  );
+}
+
+function objectIdSearchValues(value: unknown): [ObjectId, string] | null {
+  if (value instanceof ObjectId) {
+    return [value, value.toHexString()];
+  }
+
+  if (typeof value === "string" && objectIdPattern.test(value)) {
+    return [new ObjectId(value), value];
+  }
+
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const document = value as Document;
+  if (typeof document.$oid === "string" && objectIdPattern.test(document.$oid)) {
+    return [new ObjectId(document.$oid), document.$oid];
+  }
+
+  return null;
+}
+
+function uniqueObjectIdSearchValues(values: unknown[]): unknown[] {
+  const output: unknown[] = [];
+  const seen = new Set<string>();
+
+  for (const value of values) {
+    const variants = objectIdSearchValues(value);
+    const candidates = variants ? variants : [normalizeObjectIdValue(value)];
+
+    for (const candidate of candidates) {
+      const key = candidate instanceof ObjectId ? `objectId:${candidate.toHexString()}` : `${typeof candidate}:${String(candidate)}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        output.push(candidate);
+      }
+    }
+  }
+
+  return output;
+}
+
+function normalizeObjectIdQueryValue(value: unknown): unknown {
+  const directVariants = objectIdSearchValues(value);
+  if (directVariants) {
+    return { $in: directVariants };
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(normalizeObjectIdValue);
+  }
+
+  if (!value || typeof value !== "object") {
+    return value;
+  }
+
+  const document = value as Document;
+  return Object.fromEntries(
+    Object.entries(document).map(([key, childValue]) => {
+      if (key === "$eq") {
+        const variants = objectIdSearchValues(childValue);
+        return variants ? ["$in", variants] : [key, normalizeObjectIdValue(childValue)];
+      }
+
+      if (key === "$in" && Array.isArray(childValue)) {
+        return [key, uniqueObjectIdSearchValues(childValue)];
+      }
+
+      if (key === "$nin" && Array.isArray(childValue)) {
+        return [key, uniqueObjectIdSearchValues(childValue)];
+      }
+
       if (key.startsWith("$")) {
         return [key, normalizeObjectIdValue(childValue)];
       }
@@ -100,7 +184,7 @@ function normalizeDateValue(value: unknown): unknown {
 
 function normalizeValueForField(value: unknown, fieldType: string | undefined): unknown {
   if (fieldType === "objectId") {
-    return normalizeObjectIdValue(value);
+    return normalizeObjectIdQueryValue(value);
   }
 
   if (fieldType === "date") {
